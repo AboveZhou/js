@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            color: #333;
+            font-size: 12px;
+            line-height: 20px;
+        }
+        
+        ul,
+        li {
+            list-style: none;
+        }
+        
+        #content {
+            margin: 0 auto;
+            width: 540px;
+        }
+        
+        #content .scroll_top {
+            width: 540px;
+            height: 51px;
+            background: url(images/dd_scroll_top.gif) no-repeat;
+        }
+        
+        #content .scroll_mid {
+            width: 533px;
+            padding: 5px 0 5px 5px;
+            border-left: 1px solid #d6d5d6;
+            border-right: 1px solid #d6d5d6;
+            background: #f2f2f3;
+        }
+        
+        #scroll_number {
+            float: right;
+            padding-right: 10px;
+        }
+        
+        #scroll_number li {
+            margin-top: 5px;
+            width: 13px;
+            height: 13px;
+            line-height: 16px;
+            border: 1px solid #999;
+            cursor: pointer;
+            text-align: center;
+        }
+        
+        #content .scroll_end {
+            width: 540px;
+            height: 8px;
+            background: url(images/dd_scroll_end.gif) no-repeat;
+            margin-bottom: 10px;
+        }
+        
+        .scroll_number_over {
+            background-color: #f00;
+            color: #FFF;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="content">
+        <!--轮换显示的横幅广告图片-->
+        <div class="scroll_top"></div>
+        <div class="scroll_mid">
+            <img src="images/dd_scroll_1.jpg" alt="轮换显示的图片广告" id="dd_scroll" onmouseover="stopScroll()" onmouseout="goon()" />
+            <div id="scroll_number">
+                <ul>
+                    <li class="scroll_number_over" onmouseover="stopScroll(1)" onmouseout="goon()">1</li>
+                    <li onmouseover="stopScroll(2)" onmouseout="goon()">2</li>
+                    <li onmouseover="stopScroll(3)" onmouseout="goon()">3</li>
+                    <li onmouseover="stopScroll(4)" onmouseout="goon()">4</li>
+                    <li onmouseover="stopScroll(5)" onmouseout="goon()">5</li>
+                    <li onmouseover="stopScroll(6)" onmouseout="goon()">6</li>
+                </ul>
+            </div>
+        </div>
+        <div class="scroll_end"></div>
+    </div>
+    <script>
+        var dd_scroll = document.getElementById('dd_scroll')
+        var scroll_number = document.getElementById('scroll_number');
+        var liObj = scroll_number.getElementsByTagName('li');
+        // for (var i = 0; i < liObj.length; i++) {
+        //     liObj[i].setAttribute('index', i);
+        //     var ind;
+        //     liObj[i].onmouseover = function() {
+        //         for (var i = 0; i < liObj.length; i++) {
+        //             liObj[i].setAttribute('index', i);
+        //             ind = Number(this.getAttribute('index')) + 1;
+        //             dd_scroll.src = "images/dd_scroll_" + ind + ".jpg";
+        //             liObj[i].removeAttribute('class');
+        //             this.className = 'scroll_number_over';
+        //         }
+        //     }
+        // }
+        var timeId = setInterval(changeImg, 1000);
+        var ind = 2;
+
+        function changeImg() {
+            for (var i = 0; i < liObj.length; i++) {
+                liObj[i].removeAttribute('class');
+            }
+            liObj[ind - 1].className = 'scroll_number_over';
+            dd_scroll.src = "images/dd_scroll_" + ind + ".jpg";
+            ind++;
+            if (ind > 6) {
+                ind = 1;
+            }
+        }
+
+        function stopScroll(index) {
+            if (index) {
+                ind = index;
+            }
+            changeImg();
+            clearInterval(timeId);
+        }
+
+        function goon() {
+            timeId = setInterval(changeImg, 1000);
+        }
+    </script>
+</body>
+
+</html>

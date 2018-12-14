@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .backgroud {
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="text" id="txtUserName"> <br>
+    <input type="password" id="txtUserPassword"> <br>
+    <input type="button" value=" 登 录 " id="btnLogin">
+    <script>
+        var btnLogin = document.getElementById('btnLogin');
+        btnLogin.onclick = function() {
+            var txtUserName = document.getElementById('txtUserName');
+            var txtUserPassword = document.getElementById('txtUserPassword');
+            if (txtUserName.value.length < 3 || txtUserName.value.length > 6) {
+                txtUserName.className = "backgroud";
+                return;
+            } else {
+                txtUserName.className = '';
+            };
+
+            if (txtUserPassword.value.length < 6 || txtUserPassword.value.length > 8) {
+                txtUserPassword.className = "backgroud";
+                return;
+            } else {
+                txtUserPassword.className = '';
+            };
+            console.log('执行登陆');
+        }
+    </script>
+</body>
+
+</html>

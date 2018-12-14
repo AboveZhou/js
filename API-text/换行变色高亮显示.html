@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul id="mv" title="abcd">
+        <li>西施</li>
+        <li>貂蝉</li>
+        <li>王昭君</li>
+        <li>杨玉环</li>
+        <li>芙蓉姐姐</li>
+    </ul>
+    <script>
+        var mv = document.getElementById('mv');
+        var lis = mv.children;
+        // console.log(mv.children);
+        for (var i = 0; i < lis.length; i++) {
+            var li = lis[i];
+            if (i % 2 == 0) {
+                lis[i].style.backgroundColor = 'skyblue';
+            } else {
+                lis[i].style.backgroundColor = 'purple';
+            }
+            var oldColor;
+            lis[i].onmouseover = function() {
+                oldColor = this.style.backgroundColor;
+                this.style.backgroundColor = 'orange';
+            }
+            lis[i].onmouseout = function() {
+                this.style.backgroundColor = oldColor;
+            }
+        }
+    </script>
+</body>
+
+</html>

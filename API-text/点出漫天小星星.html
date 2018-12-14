@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <script>
+        document.body.parentNode.onclick = function(e) {
+            var img = document.createElement('img');
+            document.body.appendChild(img);
+            img.setAttribute('src', 'images/xingxing.gif');
+            img.style.position = 'absolute';
+            // img.style.border = '1px solid #ccc'
+            var w = getRandom(20, 100);
+            // console.log(w);
+            img.style.width = w + 'px';
+            // console.log(e);
+            var x = e.clientX;
+            var y = e.clientY;
+            img.style.left = (x - w / 2) + 'px';
+            img.style.top = (y - w / 2) + 'px';
+
+            function getRandom(min, max) {
+                return Math.floor(Math.random() * (max - min + 1) + min);
+            }
+
+        }
+        document.body.style.backgroundColor = '#000';
+    </script>
+</body>
+
+</html>

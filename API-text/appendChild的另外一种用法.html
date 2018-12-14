@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        ul {
+            height: 40px;
+            overflow: hidden;
+            border: 1px solid #ccc;
+        }
+        
+        ul li {
+            height: 40px;
+            line-height: 40px;
+            list-style: none;
+        }
+    </style>
+
+</head>
+
+<body>
+    <ul id="ul">
+        <li>历史民科们的研究：西方文明史纯属虚构1</li>
+        <li>历史民科们的研究：西方文明史纯属虚构2</li>
+        <li>历史民科们的研究：西方文明史纯属虚构3</li>
+        <li>历史民科们的研究：西方文明史纯属虚构4</li>
+        <li>历史民科们的研究：西方文明史纯属虚构5</li>
+    </ul>
+    <button id="btn">开始</button>
+    <script>
+        var ul = document.getElementById('ul');
+        var btn = document.getElementById('btn');
+        btn.onclick = function() {
+            ul.appendChild(ul.children[0])
+        }
+    </script>
+
+</body>
+
+</html>

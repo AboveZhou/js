@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .box {
+            width: 350px;
+            height: 350px;
+            margin: 100px;
+            border: 1px solid #ccc;
+            position: relative;
+        }
+        
+        .big {
+            width: 400px;
+            height: 400px;
+            position: absolute;
+            top: 0;
+            left: 360px;
+            border: 1px solid #ccc;
+            overflow: hidden;
+            display: none;
+        }
+        
+        .big img {
+            position: absolute;
+        }
+        
+        .mask {
+            width: 175px;
+            height: 175px;
+            background: rgba(255, 255, 0, 0.4);
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            cursor: move;
+            display: none;
+        }
+        
+        .small {
+            position: relative;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box" id="box">
+        <div class="small">
+            <img src="images/small.webp" width="350" alt="" />
+
+            <div class="mask"></div>
+        </div>
+        <div class="big">
+            <img src="images/big.jpg" width="800" alt="" />
+        </div>
+    </div>
+    <script>
+        var box = document.getElementById('box');
+        var smallBox = box.children[0];
+        var smallImg = smallBox.children[0];
+        var maskBox = smallBox.children[1];
+        var bigBox = box.children[1];
+        var bigImg = bigBox.children[0];
+        box.onmouseover = function() {
+            maskBox.style.display = 'block';
+            bigBox.style.display = 'block';
+        }
+        box.onmouseout = function() {
+            maskBox.style.display = 'none';
+            bigBox.style.display = 'none';
+        }
+        box.onmousemove = function(e) {
+            var x = e.pageX - box.offsetLeft;
+            var y = e.pageY - box.offsetTop;
+            x = x - maskBox.offsetWidth / 2;
+            y = y - maskBox.offsetHeight / 2;
+            x = x < 0 ? 0 : x;
+            y = y < 0 ? 0 : y;
+            x = x > box.offsetWidth - maskBox.offsetWidth ? box.offsetWidth - maskBox.offsetWidth : x;
+            y = y > box.offsetHeight - maskBox.offsetHeight ? box.offsetHeight - maskBox.offsetHeight : y;
+            maskBox.style.left = x + 'px';
+            maskBox.style.top = y + 'px';
+            //mask的移动距离 / mask的最大移动距离 = 大图片的移动距离 / 大图片的最大移动距离
+            var maskMax = box.offsetWidth - maskBox.offsetWidth;
+            var bigImgMax = bigImg.offsetWidth - bigBox.offsetWidth;
+            var bigImgX = x * bigImgMax / maskMax;
+            var bigImgY = y * bigImgMax / maskMax;
+            bigImg.style.left = -bigImgX + 'px';
+            bigImg.style.top = -bigImgY + 'px';
+        }
+    </script>
+</body>
+
+</html>

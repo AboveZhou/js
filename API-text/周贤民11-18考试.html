@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    请输入姓名: <input type="text">
+    <br/> 请输入邮箱: <input type="text">
+    <br/> 请输入手机: <input type="text">
+    <br/> 请输入地址: <input type="text">
+    <br/>
+
+    <button id="btn">添加</button>
+
+    <script>
+        var inputs = document.getElementsByTagName('input');
+        var btn = document.getElementById('btn');
+        var table = document.createElement('table');
+        table.border = '1';
+        table.align = 'center';
+        table.style.borderCollapse = 'collapse';
+        document.body.appendChild(table);
+        btn.onclick = function() {
+            var flag = true;
+            for (var i = 0; i < inputs.length; i++) {
+                if (inputs[i].value.length == 0) {
+                    flag = false;
+                    break;
+                }
+            }
+            if (flag) {
+                var tr = document.createElement('tr');
+                table.appendChild(tr);
+                for (var i = 0; i < inputs.length; i++) {
+                    var td = document.createElement('td');
+                    td.style.height = '40px';
+                    td.style.width = '150px';
+                    td.align = 'center';
+                    td.innerHTML = inputs[i].value;
+                    tr.appendChild(td);
+                }
+            } else {
+                alert('请将数据填入完全');
+                return;
+            }
+            var tableObj = document.getElementsByName('table');
+            var trObj = table.children;
+            trObj[0].style.backgroundColor = 'purple';
+            for (var i = 1; i < trObj.length; i++) {
+                if (i % 2 == 0) {
+                    trObj[i].style.backgroundColor = 'red';
+                } else {
+                    trObj[i].style.backgroundColor = 'yellow';
+                }
+            }
+        }
+    </script>
+
+</body>
+
+</html>

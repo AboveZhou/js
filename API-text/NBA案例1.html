@@ -1,0 +1,623 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            padding: 100px 0 0 100px;
+        }
+        
+        ul {
+            list-style: none;
+        }
+        
+        a {
+            text-decoration: none;
+            color: #666;
+            font-size: 18px;
+        }
+        
+        .box {
+            float: left;
+        }
+        
+        .box .header li {
+            position: relative;
+            float: left;
+        }
+        
+        .box .header li.cls {
+            left: -1px;
+        }
+        
+        .box .header li a {
+            display: inline-block;
+            line-height: 60px;
+            width: 200px;
+            text-align: center;
+            border: 1px solid #999;
+        }
+        
+        .box .header li a.current {
+            border-top: 5px solid #f40;
+            line-height: 57px;
+            border-bottom: none;
+            z-index: 2;
+        }
+        
+        .mainBody {
+            overflow: hidden;
+        }
+        
+        .mainBody>li {
+            display: none;
+        }
+        
+        .mainBody>li.current {
+            display: block;
+        }
+        
+        .mainBody-top li {
+            float: left;
+        }
+        
+        .mainBody-top li a {
+            display: inline-block;
+            margin: 0 7px;
+            padding: 10px 15px;
+        }
+        
+        .mainBody-top li a.current {
+            font-weight: 800;
+            color: #f40;
+        }
+        
+        .mainBody-bottom {
+            float: left;
+        }
+        
+        .mainBody-bottom table {
+            display: none;
+        }
+        
+        .mainBody-bottom table.current {
+            display: block;
+        }
+        
+        .mainBody-bottom thead {
+            background-color: rgba(100, 100, 100, .3);
+        }
+        
+        .mainBody-bottom td {
+            display: inline-block;
+            width: 99px;
+            line-height: 30px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <ul class="mainBody" id="mainBody">
+            <li class="current">
+                <div class="mainBody-top" id="mainBody_top">
+                    <ul>
+                        <li><a href="javascript:;" class="current">得分</a></li>
+                        <li><a href="javascript:;">篮板</a></li>
+                        <li><a href="javascript:;">助攻</a></li>
+                        <li><a href="javascript:;">抢断</a></li>
+                        <li><a href="javascript:;">盖帽</a></li>
+                    </ul>
+                </div>
+                <div class="mainBody-bottom" id="mainBody_bottom">
+                    <table class="current">
+                        <thead>
+                            <tr>
+                                <td>名次</td>
+                                <td>球员</td>
+                                <td>球队</td>
+                                <td>场均</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>格林</td>
+                                <td>勇士</td>
+                                <td>2.03</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>沃尔</td>
+                                <td>奇才</td>
+                                <td>2.01</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>保罗</td>
+                                <td>快船</td>
+                                <td>1.97</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>卡文顿</td>
+                                <td>76人</td>
+                                <td>1.9</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>巴特勒</td>
+                                <td>公牛</td>
+                                <td>1.87</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>罗斯</td>
+                                <td>火箭</td>
+                                <td>1.8</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>名次</td>
+                                <td>球员</td>
+                                <td>球队</td>
+                                <td>场均</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>o</td>
+                                <td>格林2</td>
+                                <td>勇士</td>
+                                <td>2.03</td>
+                            </tr>
+                            <tr>
+                                <td>t</td>
+                                <td>沃尔2</td>
+                                <td>奇才</td>
+                                <td>2.01</td>
+                            </tr>
+                            <tr>
+                                <td>tr</td>
+                                <td>保罗2</td>
+                                <td>快船</td>
+                                <td>2.97</td>
+                            </tr>
+                            <tr>
+                                <td>f</td>
+                                <td>卡文顿2</td>
+                                <td>76人</td>
+                                <td>2.9</td>
+                            </tr>
+                            <tr>
+                                <td>fi</td>
+                                <td>巴特勒2</td>
+                                <td>公牛</td>
+                                <td>2.87</td>
+                            </tr>
+                            <tr>
+                                <td>s</td>
+                                <td>罗斯2</td>
+                                <td>火箭</td>
+                                <td>2.8</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>名次</td>
+                                <td>球员</td>
+                                <td>球队</td>
+                                <td>场均</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>①</td>
+                                <td>格林3</td>
+                                <td>勇士</td>
+                                <td>3.03</td>
+                            </tr>
+                            <tr>
+                                <td>②</td>
+                                <td>沃尔3</td>
+                                <td>奇才</td>
+                                <td>3.01</td>
+                            </tr>
+                            <tr>
+                                <td>③</td>
+                                <td>保罗3</td>
+                                <td>快船</td>
+                                <td>3.97</td>
+                            </tr>
+                            <tr>
+                                <td>④</td>
+                                <td>卡文顿3</td>
+                                <td>76人</td>
+                                <td>3.9</td>
+                            </tr>
+                            <tr>
+                                <td>⑤</td>
+                                <td>巴特勒3</td>
+                                <td>公牛</td>
+                                <td>3.87</td>
+                            </tr>
+                            <tr>
+                                <td>⑥</td>
+                                <td>罗斯3</td>
+                                <td>火箭</td>
+                                <td>3.8</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>名次</td>
+                                <td>球员</td>
+                                <td>球队</td>
+                                <td>场均</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>格林4</td>
+                                <td>勇士</td>
+                                <td>2.03</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>沃尔4</td>
+                                <td>奇才</td>
+                                <td>2.01</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>保罗4</td>
+                                <td>快船</td>
+                                <td>1.97</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>卡文顿4</td>
+                                <td>76人</td>
+                                <td>1.9</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>巴特勒4</td>
+                                <td>公牛</td>
+                                <td>1.87</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>罗斯4</td>
+                                <td>火箭</td>
+                                <td>1.8</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>名次</td>
+                                <td>球员</td>
+                                <td>球队</td>
+                                <td>场均</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>格林5</td>
+                                <td>勇士</td>
+                                <td>2.03</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>沃尔5</td>
+                                <td>奇才</td>
+                                <td>2.01</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>保罗5</td>
+                                <td>快船</td>
+                                <td>1.97</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>卡文顿5</td>
+                                <td>76人</td>
+                                <td>1.9</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>巴特勒5</td>
+                                <td>公牛</td>
+                                <td>1.87</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>罗斯5</td>
+                                <td>火箭</td>
+                                <td>1.8</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </li>
+
+            <li>
+                <div class="mainBody-top" id="mainBody_top">
+                    <ul>
+                        <li><a href="javascript:;" class="current">嘻嘻</a></li>
+                        <li><a href="javascript:;">哈哈</a></li>
+                        <li><a href="javascript:;">嘿嘿</a></li>
+                        <li><a href="javascript:;">嚯嚯</a></li>
+                        <li><a href="javascript:;">呵呵</a></li>
+                    </ul>
+                </div>
+                <div class="mainBody-bottom" id="mainBody_bottom">
+                    <table class="current">
+                        <thead>
+                            <tr>
+                                <td>传传</td>
+                                <td>智智</td>
+                                <td>播播</td>
+                                <td>客客</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>格林</td>
+                                <td>勇士</td>
+                                <td>2.03</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>沃尔</td>
+                                <td>奇才</td>
+                                <td>2.01</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>保罗</td>
+                                <td>快船</td>
+                                <td>1.97</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>卡文顿</td>
+                                <td>76人</td>
+                                <td>1.9</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>巴特勒</td>
+                                <td>公牛</td>
+                                <td>1.87</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>罗斯</td>
+                                <td>火箭</td>
+                                <td>1.8</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>名次</td>
+                                <td>球员</td>
+                                <td>球队</td>
+                                <td>场均</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>格林2</td>
+                                <td>勇士</td>
+                                <td>2.03</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>沃尔2</td>
+                                <td>奇才</td>
+                                <td>2.01</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>保罗2</td>
+                                <td>快船</td>
+                                <td>1.97</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>卡文顿2</td>
+                                <td>76人</td>
+                                <td>1.9</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>巴特勒2</td>
+                                <td>公牛</td>
+                                <td>1.87</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>罗斯2</td>
+                                <td>火箭</td>
+                                <td>1.8</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>名次</td>
+                                <td>球员</td>
+                                <td>球队</td>
+                                <td>场均</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>格林3</td>
+                                <td>勇士</td>
+                                <td>2.03</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>沃尔3</td>
+                                <td>奇才</td>
+                                <td>2.01</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>保罗3</td>
+                                <td>快船</td>
+                                <td>1.97</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>卡文顿3</td>
+                                <td>76人</td>
+                                <td>1.9</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>巴特勒3</td>
+                                <td>公牛</td>
+                                <td>1.87</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>罗斯3</td>
+                                <td>火箭</td>
+                                <td>1.8</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>名次</td>
+                                <td>球员</td>
+                                <td>球队</td>
+                                <td>场均</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>格林4</td>
+                                <td>勇士</td>
+                                <td>2.03</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>沃尔4</td>
+                                <td>奇才</td>
+                                <td>2.01</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>保罗4</td>
+                                <td>快船</td>
+                                <td>1.97</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>卡文顿4</td>
+                                <td>76人</td>
+                                <td>1.9</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>巴特勒4</td>
+                                <td>公牛</td>
+                                <td>1.87</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>罗斯4</td>
+                                <td>火箭</td>
+                                <td>1.8</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>名次</td>
+                                <td>球员</td>
+                                <td>球队</td>
+                                <td>场均</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>格林5</td>
+                                <td>勇士</td>
+                                <td>2.03</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>沃尔5</td>
+                                <td>奇才</td>
+                                <td>2.01</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>保罗5</td>
+                                <td>快船</td>
+                                <td>1.97</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>卡文顿5</td>
+                                <td>76人</td>
+                                <td>1.9</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>巴特勒5</td>
+                                <td>公牛</td>
+                                <td>1.87</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>罗斯5</td>
+                                <td>火箭</td>
+                                <td>1.8</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <script>
+    </script>
+</body>
+
+</html>

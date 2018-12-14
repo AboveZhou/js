@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            border: 0;
+        }
+        
+        .all {
+            width: 500px;
+            height: 200px;
+            padding: 7px;
+            border: 1px solid #ccc;
+            margin: 100px auto;
+            position: relative;
+        }
+        
+        .screen {
+            width: 500px;
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .screen li {
+            width: 500px;
+            height: 200px;
+            overflow: hidden;
+            float: left;
+        }
+        
+        .screen ul {
+            position: absolute;
+            left: 0;
+            top: 0px;
+            width: 3000px;
+        }
+        
+        .all ol {
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+            line-height: 20px;
+            text-align: center;
+        }
+        
+        .all ol li {
+            float: left;
+            width: 20px;
+            height: 20px;
+            background: #fff;
+            border: 1px solid #ccc;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+        
+        .all ol li.current {
+            background: yellow;
+        }
+        
+        #arr {
+            display: none;
+            z-index: 1000;
+        }
+        
+        #arr span {
+            width: 40px;
+            height: 40px;
+            position: absolute;
+            left: 5px;
+            top: 50%;
+            margin-top: -20px;
+            background: #000;
+            cursor: pointer;
+            line-height: 40px;
+            text-align: center;
+            font-weight: bold;
+            font-family: '黑体';
+            font-size: 30px;
+            color: #fff;
+            opacity: 0.3;
+            border: 1px solid #fff;
+        }
+        
+        #arr #right {
+            right: 5px;
+            left: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="all" id='box'>
+        <div class="screen">
+            <ul>
+                <li><img src="images/wf1.jpg" width="500" height="200" /></li>
+                <li><img src="images/wf2.jpg" width="500" height="200" /></li>
+                <li><img src="images/wf3.jpg" width="500" height="200" /></li>
+                <li><img src="images/wf4.jpg" width="500" height="200" /></li>
+                <li><img src="images/wf5.jpg" width="500" height="200" /></li>
+            </ul>
+            <ol>
+            </ol>
+        </div>
+        <div id="arr"><span id="left">&lt;</span><span id="right">&gt;</span></div>
+    </div>
+</body>
+<script>
+    var box = document.getElementById('box');
+    var screen = box.children[0];
+    var ul = screen.children[0];
+    var lis = ul.children;
+    var ol = screen.children[1];
+    var arr = document.getElementById('arr');
+    var left = document.getElementById('left');
+    var right = document.getElementById('right');
+    var timeId = null;
+
+    function animate(obj, target) {
+        if (obj.timeId) {
+            clearInterval(obj.timeId);
+            obj.timeId = null;
+        }
+        obj.timeId = setInterval(function() {
+                var step = 9;
+                var current = obj.offsetLeft;
+                if (target > current) {
+                    current = obj.offsetLeft + step;
+                } else {
+                    current = obj.offsetLeft - step;
+                }
+                obj.style.left = current + 'px';
+                if (Math.abs(target - current) < Math.abs(step)) {
+                    clearInterval(obj.timeId);
+                    obj.style.left = target + 'px';
+                }
+            },
+            10)
+    }
+    var len = lis.length;
+    for (var i = 0; i < len; i++) {
+        //创建ol中的li元素
+        var liobj = document.createElement('li');
+        liobj.innerText = i + 1;
+        ol.appendChild(liobj);
+        //给ol中的li注册单击事件
+        liobj.onclick = liClick;
+        ol.children[i].setAttribute('index', i); //给ol下的li追加index属性
+    }
+    ol.children[0].setAttribute('class', 'current') //默认ol下的第一个li高亮
+
+    function liClick() {
+        for (var i = 0; i < ol.children.length; i++) {
+            ol.children[i].removeAttribute('class');
+        }
+        var liIndex = this.getAttribute('index');
+        this.setAttribute('class', 'current');
+        animate(ul, -liIndex * screen.offsetWidth);
+        index = liIndex;
+    }
+    timeId = setInterval(function() {
+        right.click();
+    }, 3000)
+    box.onmouseenter = function() {
+        arr.style.display = 'block';
+        clearInterval(timeId);
+    }
+    box.onmouseleave = function() {
+        arr.style.display = 'none';
+        timeId = setInterval(function() {
+            right.click();
+        }, 3000)
+    }
+    var clone = ul.children[0].cloneNode(true); // 克隆ul下的第一个li元素
+    ul.appendChild(clone);
+    var index = 0; //记录当下图片的下标
+    right.onclick = function() {
+        if (index == len) { //如果图片的下标等于克隆前图片元素的长度,则让图片的下标等于0,坐标回到原点
+            index = 0;
+            ul.style.left = 0;
+        }
+        index++;
+        if (index < len) {
+            ol.children[index].click(); //如果图片的下标小于原图片元素的长度,则让执行ol中的li的点击事件
+        } else {
+            animate(ul, -index * screen.offsetWidth);
+            for (var i = 0; i < ol.children.length; i++) {
+                ol.children[i].removeAttribute('class');
+            }
+            ol.children[0].setAttribute('class', 'current');
+        }
+    }
+    left.onclick = function() {
+        if (index == 0) { //如果图片的下标为0;则让第一张图片快速回到克隆的那张图片上
+            index = len;
+            ul.style.left = -index * screen.offsetWidth + 'px';
+        }
+        index--;
+        ol.children[index].click();
+    }
+</script>
+
+</html

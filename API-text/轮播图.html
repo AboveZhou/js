@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            border: 0;
+        }
+        
+        .all {
+            width: 500px;
+            height: 200px;
+            padding: 7px;
+            border: 1px solid #ccc;
+            margin: 100px auto;
+            position: relative;
+        }
+        
+        .screen {
+            width: 500px;
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .screen li {
+            width: 500px;
+            height: 200px;
+            overflow: hidden;
+            float: left;
+        }
+        
+        .screen ul {
+            position: absolute;
+            left: 0;
+            top: 0px;
+            width: 3000px;
+        }
+        
+        .all ol {
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+            line-height: 20px;
+            text-align: center;
+        }
+        
+        .all ol li {
+            float: left;
+            width: 20px;
+            height: 20px;
+            background: #fff;
+            border: 1px solid #ccc;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+        
+        .all ol li.current {
+            background: yellow;
+        }
+        
+        #arr {
+            display: none;
+            z-index: 1000;
+        }
+        
+        #arr span {
+            width: 40px;
+            height: 40px;
+            position: absolute;
+            left: 5px;
+            top: 50%;
+            margin-top: -20px;
+            background: #000;
+            cursor: pointer;
+            line-height: 40px;
+            text-align: center;
+            font-weight: bold;
+            font-family: '黑体';
+            font-size: 30px;
+            color: #fff;
+            opacity: 0.3;
+            border: 1px solid #fff;
+        }
+        
+        #arr #right {
+            right: 5px;
+            left: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="all" id='box'>
+        <div class="screen">
+            <ul>
+                <li><img src="images/wf1.jpg" width="500" height="200" /></li>
+                <li><img src="images/wf2.jpg" width="500" height="200" /></li>
+                <li><img src="images/wf3.jpg" width="500" height="200" /></li>
+                <li><img src="images/wf4.jpg" width="500" height="200" /></li>
+                <li><img src="images/wf5.jpg" width="500" height="200" /></li>
+            </ul>
+            <ol>
+            </ol>
+        </div>
+        <div id="arr"><span id="left">&lt;</span><span id="right">&gt;</span></div>
+    </div>
+    <script>
+        var box = document.getElementById('box');
+        var screen = box.children[0];
+        var ul = screen.children[0];
+        var lis = ul.children;
+        var ol = screen.children[1];
+        var arr = document.getElementById('arr');
+        var left = document.getElementById('left');
+        var right = document.getElementById('right');
+        var couut = 0; // 设变量记录箭头点击次数
+        var sum = 0; // 设变量记录下面ol下的li小方块的点击次数
+
+        function animate(obj, target) {
+            if (obj.timeId) {
+                clearInterval(obj.timeId);
+                obj.timeId = null;
+            }
+            obj.timeId = setInterval(function() {
+                    var step = 9;
+                    var current = obj.offsetLeft;
+                    if (target > current) {
+                        current = obj.offsetLeft + step;
+                    } else {
+                        current = obj.offsetLeft - step;
+                    }
+                    obj.style.left = current + 'px';
+                    if (Math.abs(target - current) < Math.abs(step)) {
+                        clearInterval(obj.timeId);
+                        obj.style.left = target + 'px';
+                    }
+                },
+                10)
+        }
+        for (var i = 0; i < lis.length; i++) {
+            var li = document.createElement('li');
+            li.innerText = i + 1;
+            ol.appendChild(li);
+        }
+        ol.children[0].setAttribute('class', 'current')
+        for (var i = 0; i < ol.children.length; i++) {
+            ol.children[i].setAttribute('index', i);
+            ol.children[i].onclick = function() {
+                for (var j = 0; j < ol.children.length; j++) {
+                    ol.children[j].removeAttribute('class');
+                }
+                var liIndex = this.getAttribute('index');
+                animate(ul, -liIndex * screen.offsetWidth);
+                this.setAttribute('class', 'current');
+                sum = couut = liIndex;
+            }
+        }
+        var timeId = setInterval(function() {
+            Right()
+        }, 3000); // 设变量定时器
+        box.onmouseenter = function() {
+            arr.style.display = 'block';
+            clearInterval(timeId);
+        }
+
+        box.onmouseleave = function() {
+            arr.style.display = 'none';
+            timeId = setInterval(function() {
+                Right()
+            }, 3000);
+        }
+        var clone = ul.children[0].cloneNode(true); // 克隆ul下的第一个li元素
+        ul.appendChild(clone);
+        // console.log(ul.children.length)
+        //右箭头  从右往左走
+
+        right.onmousedown = function() {
+            // if (couut == ol.children.length) {
+            //     couut = 0;
+            //     ul.style.left = 0;
+            // }
+            // couut++;
+            // if (sum < ol.children.length - 1) {
+            //     sum++;
+            // } else {
+            //     sum = 0;
+            // }
+            // for (var i = 0; i < ol.children.length; i++) {
+            //     ol.children[i].removeAttribute('class');
+            // }
+            // ol.children[sum].setAttribute('class', 'current');
+            // animate(ul, -couut * screen.offsetWidth);
+            Right()
+        }
+
+        left.onmousedown = function() {
+            if (couut == 0) {
+                couut = ol.children.length;
+                ul.style.left = -ol.children.length * screen.offsetWidth;
+            }
+            couut--;
+            if (sum > 0) {
+                sum--;
+            } else {
+                sum = ol.children.length - 1;
+            }
+            for (var i = 0; i < ol.children.length; i++) {
+                ol.children[i].removeAttribute('class');
+            }
+            ol.children[sum].setAttribute('class', 'current');
+            animate(ul, -couut * screen.offsetWidth);
+        }
+
+        function Right() {
+            if (couut == ol.children.length) {
+                couut = 0;
+                ul.style.left = 0;
+            }
+            couut++;
+            if (sum < ol.children.length - 1) {
+                sum++;
+            } else {
+                sum = 0;
+            }
+            for (var i = 0; i < ol.children.length; i++) {
+                ol.children[i].removeAttribute('class');
+            }
+            ol.children[sum].setAttribute('class', 'current');
+            animate(ul, -couut * screen.offsetWidth);
+        }
+    </script>
+</body>
+
+</html>

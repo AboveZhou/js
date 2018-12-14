@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="box"></div>
+    <button id="btn">点击创建</button>
+    <script>
+        var box = document.getElementById('box');
+        var btn = document.getElementById('btn');
+        var arr = [1, 2, 3, 4];
+        btn.onclick = function() {
+            var a = document.getElementsByTagName('ul');
+            if (a.length) {
+                return;
+            }
+            var ul = document.createElement('ul');
+            box.appendChild(ul);
+            for (var i = 0; i < arr.length; i++) {
+                var lis = document.createElement('li');
+                lis.innerHTML = arr[i];
+                console.log(lis);
+                if (i % 2 == 0) {
+                    lis.style.backgroundColor = 'skyblue';
+                } else {
+                    lis.style.backgroundColor = 'purple';
+                }
+                var oldColor;
+                lis.onmouseover = function() {
+                    oldColor = this.style.backgroundColor;
+                    this.style.backgroundColor = 'orange';
+                }
+                lis.onmouseout = function() {
+                    this.style.backgroundColor = oldColor;
+                }
+                ul.appendChild(lis);
+            }
+            // btn.style.display = 'none';
+        }
+    </script>
+</body>
+
+</html>

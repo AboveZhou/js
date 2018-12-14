@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        #box {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="button" id="btn" value="动画 400">
+    <input type="button" id="btn1" value="动画 800">
+    <div id="box">
+    </div>
+    <script>
+        var btn = document.getElementById('btn');
+        var btn1 = document.getElementById('btn1');
+        var box = document.getElementById('box');
+        btn.onclick = function() {
+            animate(box, 400)
+        }
+        btn1.onclick = function() {
+            animate(box, 800)
+        }
+
+        function animate(obj, target) {
+            if (obj.timeId) {
+                clearInterval(obj.timeId);
+                obj.timeId = null;
+            }
+            obj.timeId = setInterval(function() {
+                    var step = 9;
+                    var current = obj.offsetLeft;
+                    if (target > current) {
+                        current = obj.offsetLeft + step;
+                    } else {
+                        current = obj.offsetLeft - step;
+                    }
+                    obj.style.left = current + 'px';
+                    if (Math.abs(target - current) < Math.abs(step)) {
+                        clearInterval(obj.timeId);
+                        obj.style.left = target + 'px';
+                    }
+                },
+                30)
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>网页标题</title>
+    <meta name="keywords" content="关键字列表" />
+    <meta name="description" content="网页描述" />
+    <link rel="stylesheet" type="text/css" href="" />
+    <style type="text/css"></style>
+
+</head>
+
+<body>
+    <table border='1' width='400' align='center' style='border-collapse:collapse;' id="table">
+        <tr>
+            <th>序号</th>
+            <th>标题</th>
+            <th>发布时间</th>
+            <th>删除</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>武汉传智PHP要开班了</td>
+            <td>2016-3-20</td>
+            <td><input type='checkbox' name='id' /></td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>佛山传智PHP要开班了</td>
+            <td>2018-3-20</td>
+            <td><input type='checkbox' name='id' /></td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>纽约传智PHP要开班了</td>
+            <td>2018-3-20</td>
+            <td><input type='checkbox' name='id' /></td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>伦敦传智PHP要开班了</td>
+            <td>2018-3-20</td>
+            <td><input type='checkbox' name='id' /></td>
+        </tr>
+        <tr>
+            <td colspan='4' align='right'>
+                <button type='button' id='quanxuan' />全选</button>
+                <button type='button' id='quxiao' />取消</button>
+                <button type='button' id='fanxuan' />反选</button>
+                <button type='button' id='del' />删除</button>
+            </td>
+        </tr>
+    </table>
+    <script type="text/javascript">
+        var quanxuan = document.getElementById('quanxuan');
+        var idObj = document.getElementsByName('id');
+        quanxuan.onclick = function() {
+            for (var i = 0; i < idObj.length; i++) {
+                var id = idObj[i];
+                id.checked = true;
+            }
+        }
+        var fquxiao = document.getElementById('quxiao');
+        quxiao.function = function() {
+            for (var i = 0; i < idObj.length; i++) {
+                var id = idObj[i];
+                if (id.checked) {
+                    id.checked = false;
+                }
+            }
+        }
+        var fanxuan = document.getElementById('fanxuan');
+        fanxuan.onclick = function() {
+            for (var i = 0; i < idObj.length; i++) {
+                var id = idObj[i];
+                id.checked = !id.checked;
+            }
+        }
+        var del = document.getElementById('del');
+        del.onclick = function() {
+            var arr = [];
+            for (var i = 0; i < idObj.length; i++) {
+                var id = idObj[i];
+                if (id.checked) {
+                    arr.push(id);
+                }
+            }
+            for (var i = 0; i < arr.length; i++) {
+                arr[i].parentNode.parentNode.parentNode.removeChild(arr[i].parentNode.parentNode)
+            }
+            // if (id.checked) {
+            //     id.parentNode.parentNode.parentNode.removeChild(id.parentNode.parentNode)
+            // }
+        }
+    </script>
+</body>
+
+</html>

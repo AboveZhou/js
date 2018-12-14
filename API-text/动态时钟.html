@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        #box {
+            width: 400px;
+            height: 200px;
+            text-align: center;
+            line-height: 200px;
+            background-color: #daa520;
+            font-size: 20px;
+            color: #f00;
+            /*要实现一个盒子在浏览器上面水平方向居中垂直方向居中显示*/
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -200px;
+            margin-top: -100px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="box"></div>
+    <script>
+        var id = document.getElementById('box');
+
+        function getTimes() {
+            var dates = new Date();
+            var times = dates.toLocaleString();
+            box.innerText = times;
+        }
+        getTimes();
+        setInterval(getTimes, 1000);
+    </script>
+
+</body>
+
+</html>
