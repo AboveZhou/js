@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var dateStr = '2015-1-5';
+        //第一种  分组提取
+        var reg = /(\d{4})-(\d{1,2})-(\d{1,2})/;
+        reg.exec(dateStr);
+        console.log(RegExp.$1);
+        console.log(RegExp.$2);
+        console.log(RegExp.$3);
+        // split 方法
+        var result = dateStr.split('-');
+        console.log(result);
+
+        var dateStr = '2015/1-5';
+        console.log(dateStr.split(/[/-]/));
+    </script>
+</body>
+
+</html>

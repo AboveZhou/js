@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    QQ号：<input type="text" id="txtQQ"><span></span><br> 邮箱：
+    <input type="text" id="txtEMail"><span></span><br> 手机：
+    <input type="text" id="txtPhone"><span></span><br> 生日：
+    <input type="text" id="txtBirthday"><span></span><br> 姓名：
+    <input type="text" id="txtName"><span></span><br>
+    <script>
+        var txtQQ = document.getElementById('txtQQ');
+
+        //注册失去焦点事件
+        txtQQ.onblur = function() {
+            //定义正则表达式
+            var reg = /^\d{5,12}$/;
+            //获取span标签
+            var span = this.nextElementSibling;
+            //判断,如果输入的条件不满足  则在span标签中提示输入正确的方式并用红色字体显示
+            if (!reg.test(this.value)) {
+                span.innerText = '输入正确的QQ号';
+                span.style.color = 'red';
+            } else {
+                span.innerText = '';
+                span.style.color = '';
+            }
+        }
+    </script>
+</body>
+
+</html>

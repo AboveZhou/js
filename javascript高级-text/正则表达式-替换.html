@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var str = "   123AD  asadf     asadfasf  adf ";
+        // 第一种方法  replace
+        var result = str.replace(/\s/g, '');
+        console.log(result);
+        // 第二种
+        console.log(str.split(' ').join(''));
+    </script>
+</body>
+
+</html>

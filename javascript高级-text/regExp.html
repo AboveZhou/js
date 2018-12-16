@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var obj = '123';
+        var reg = new RegExp('\\d{3}', 'gi');
+        var reg2 = /\d{3}/gi;
+        console.log(reg.test(obj));
+        console.log(reg2.test(obj));
+    </script>
+</body>
+
+</html>

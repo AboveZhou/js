@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var arr = new Array(1, 2, 3, 4, 5);
+        Array.prototype.getSum = function() {
+            var sum = 0;
+            for (var i = 0; i < this.length; i++) {
+                if (this[i] % 2 == 0) {
+                    sum = sum + this[i];
+                }
+            }
+            return sum;
+        }
+        console.log(arr.getSum());
+
+        var arr1 = [2, 5, 8, 12, 15, 24]
+        console.log(Array.prototype.getSum.call(arr1));
+        var obj = {
+            0: 'zs',
+            1: 'ls',
+            length: 2
+        }
+        Array.prototype.push.call(obj, 'ww');
+        console.log(obj);
+    </script>
+</body>
+
+</html>

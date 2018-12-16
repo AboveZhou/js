@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var wjl = {
+            name: '王健林',
+            money: 10000,
+            cars: ['玛莎拉蒂',
+                '特斯拉'
+            ]
+        }
+        var wsc = {
+            name: '王思聪',
+
+        }
+
+        function jc(parent, son) {
+            for (var key in parent) {
+                if (son[key]) {
+                    continue
+                }
+                son[key] = parent[key]
+            }
+        }
+        jc(wjl, wsc)
+        console.dir(wsc)
+    </script>
+</body>
+
+</html>

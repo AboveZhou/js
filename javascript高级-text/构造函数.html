@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function Person(name, age, sex) {
+            this.name = name;
+            this.age = age;
+            this.sex = sex;
+
+        }
+        var p1 = new Person('zs', 18, '男');
+        console.log(p1 instanceof Person); //判断某个对象是否是构造函数的实例化对象
+        console.log(p1.constructor); //  返回当前对象的构造函数
+    </script>
+</body>
+
+</html>
