@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<form action="" method="post">
+		name:<input type="text" name="" id="username"><span id="info"></span><br>
+		pwd:<input type="password" name="" id="">
+	</form>
+	<script>
+	document.getElementById('username').onblur = function(){
+		var name = this.value;
+
+		// 四个步骤：
+		// 第一步：创建对象
+		var xhr = new XMLHttpRequest();
+       
+		// 第二步：准备数据  xhr.open()  
+		xhr.open("get","checkname.php?name="+name);
+
+		// 第三步：发送数据  xhr.send()
+		xhr.send(null);
+         
+		// 第四步：接收从服务器返回的数据
+		xhr.onreadystatechange = function(){
+			
+			if(xhr.readyState==4&&xhr.status==200){
+				var res = xhr.responseText;
+				// console.log(res);
+				document.getElementById('info').innerHTML = res;
+			}
+		}
+
+	}
+
+
+
+
+
+	</script>
+</body>
+</html>

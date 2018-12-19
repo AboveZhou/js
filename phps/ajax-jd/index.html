@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+
+<body>
+    <h2>京东商城</h2>
+    <ul id="uu">
+        <!-- <li>
+            <a href="#">
+                <img src="./images/nav_1.png" alt="">
+                <p>京东超市</p>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <img src="./images/nav_2.png" alt="">
+                <p>全球购物</p>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <img src="./images/nav_3.png" alt="">
+                <p>京东市场</p>
+            </a>
+        </li> -->
+    </ul>
+</body>
+<script>
+    window.onload = function() {
+        //   ajax操作   准备对象
+        var xhr = new XMLHttpRequest();
+        //准备数据  t通过什么方式请求  get/post
+        xhr.open("get", "info.php");
+        //发送数据
+        xhr.send(null);
+        xhr.onreadystatechange = function() {
+            //需要满足两个条件  1.服务器成功响应了xhr.status=200  2.数据解析完毕可以使用了xhr.readyState=4
+            if (xhr.status == 200 && xhr.readyState == 4) {
+                var str = xhr.responseText;
+                // console.log(str);
+                var arr = JSON.parse(str);
+                // console.log(arr);
+                var html = '';
+                arr.forEach(function(value, index) {
+                    // console.log(index);
+                    html += '<li>';
+                    html += '<a href = "#" >';
+                    html += '<img src = "' + value.src + '" alt = "" >';
+                    html += '<p>' + value.name + '</p>';
+                    html += '</a>';
+                    html += '</li>'
+                })
+                document.getElementById('uu').innerHTML = html;
+            }
+        }
+    }
+</script>
+
+</html>

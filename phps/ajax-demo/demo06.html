@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+<body>
+    <h2>京东商城</h2>
+<ul>
+   
+</ul>
+</body>
+<script src="./jquery.js"></script>
+<script src="./template-web.js"></script>
+<script type="text/template" id="jdTpl">
+   {{each list }}
+     <li>
+        <a href="#">
+            <img src="{{$value.src}}" alt="">
+            <p>{{$value.name}}--{{$index}}</p>
+         </a>
+     </li>
+   {{/each}}
+</script>
+
+<script>
+   $.ajax({
+       url:"./getJdData.php",
+       dataType:'json',
+       success:function(res){
+         // console.log(res)
+          var html = template('jdTpl',{list:res});
+
+          $('ul').html(html);
+       }
+   })
+
+</script>
+</html>

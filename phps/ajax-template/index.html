@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="./css/index.css">
+    <script src="jquery.js"></script>
+    <script src="template-web.js"></script>
+</head>
+
+<body>
+    <h2>京东商城</h2>
+    <ul id="uu">
+        <!-- <li>
+            <a href="#">
+                <img src="./images/nav_1.png" alt="">
+                <p>京东超市</p>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <img src="./images/nav_2.png" alt="">
+                <p>全球购物</p>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <img src="./images/nav_3.png" alt="">
+                <p>京东市场</p>
+            </a>
+        </li> -->
+    </ul>
+</body>
+<script type="text/template" id="jd">
+    {{each list value index}}
+    <li>
+        <a href="#">
+            <img src="{{value.src}}" alt="">
+            <p>{{value.name}}</p>
+        </a>
+    </li>
+    {{/each}}
+</script>
+<script>
+    $.ajax({
+        url: "info.php",
+        dataType: "json",
+        success: function(res) {
+            // console.log(res);
+            var html = template("jd", {
+                list: res
+            });
+            document.querySelector('#uu').innerHTML = html
+        }
+    });
+</script>
+
+</html>

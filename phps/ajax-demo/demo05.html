@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<form action="" method="post">
+		name:<input type="text" name="" id="username"><span id="info"></span><br>
+		pwd:<input type="password" name="" id="">
+	</form>
+	<script src="./jquery.js"></script>
+	<script>
+	$(function(){
+		$('#username').blur(function(){
+			var name = $(this).val();
+
+			$.ajax({
+				type:'get',
+				url:"./checkname.php",
+				data:{
+					"name":name
+				},
+				beforeSend:function(){
+					if(name.trim()==''){
+						alert("请输入用户名");
+						return false;
+					}
+				},
+				dataType:'text',
+				success:function(res){
+					// console.log(res);
+					$('#info').html(res);
+				}
+			})
+
+
+		})
+
+
+
+	})
+	</script>
+</body>
+</html>

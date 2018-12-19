@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+<body>
+    <h2>京东商城</h2>
+<ul>
+   
+</ul>
+</body>
+<script>
+   
+	window.onload = function(){
+      
+      var xhr = new XMLHttpRequest();
+
+      xhr.open('get','getJdData.php');
+
+      xhr.send(null);
+
+      xhr.onreadystatechange = function(){
+      	if(xhr.readyState==4&&xhr.status==200){
+      		var res = xhr.responseText
+      		// console.log(res);
+      		var data = JSON.parse(res);
+      		// console.log(data);
+      		var html = ""
+      		data.forEach(function(value,index){
+      			html +='<div>'
+			    html +='   <a href="#">'
+			    html +='       <img src="'+value.src+'" alt="">'
+			    html +='       <p>'+value.name+'</p>'
+			    html +='    </a>'
+			    html +='</div>'
+      		})
+
+            document.querySelector('ul').innerHTML = html;
+      		
+      	}
+      }
+	}
+
+
+
+
+
+
+</script>
+</html>
