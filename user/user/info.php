@@ -8,8 +8,8 @@ while($row = mysqli_fetch_assoc($result)) {
   $arr[]= $row;
 }
 // print_r($arr);
-
-echo json_encode($arr);
-
+$callback = $_GET['callback'];
+$data = json_encode($arr);
+echo "$callback($data)";
 
 ?>
