@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="">
+        用户名:<input type="text" name="username" id="username"><br> 电话: <input type="tel" name="userphone" id="userphone"><br>
+        <input type="submit" value="提交">
+
+
+    </form>
+</body>
+<script>
+    //当input框里value改变的时候触发
+    document.getElementById('username').oninput = function() {
+            console.log('input' + this.value);
+        }
+        // 当input框里value改变并失去焦点的时候触发
+    document.getElementById('username').onchange = function() {
+            console.log('change' + this.value);
+        }
+        //当键盘弹起的时候触发
+    document.getElementById('username').onkeyup = function() {
+            console.log('keyup' + this.value);
+        }
+        /*oninvalid:当验证不通过时触发*/
+    document.getElementById("userphone").oninvalid = function() {
+        /*设置默认的提示信息*/
+        this.setCustomValidity("请输入合法的11位手机号");
+    }
+</script>
+
+</html>

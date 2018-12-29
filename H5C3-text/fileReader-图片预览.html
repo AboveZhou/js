@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="">
+        <input type="file" name="file" id="file" multiple>
+    </form>
+    <div class="box"></div>
+</body>
+<script>
+    // 读取一个文件
+    document.querySelector('#file').onchange = function() {
+        //获取文件
+        var file = this.files[0];
+        //构造对象
+        var reader = new FileReader();
+        //调用方法
+        reader.readAsDataURL(file);
+        reader.onload = function() {
+            var div = document.querySelector(".box");
+            //每次触发前清空div
+            div.innerHTML = '';
+            //创建img
+            var img = document.createElement('img');
+            img.src = reader.result;
+            div.appendChild(img);
+        }
+    }
+
+
+    //读取多个文件
+    // document.querySelector('#file').onchange = function() {
+    //     //获取文件
+    //     var files = this.files;
+    //     //利用循环 获取多个文件
+    //     for (var i = 0; i < files.length; i++) {
+    //         getMore(files[i]);
+    //     }
+
+    // }
+    // //封装函数
+    // function getMore(files) {
+    //     //构造对象
+    //     var reader = new FileReader();
+    //     //调用方法
+    //     reader.readAsDataURL(files);
+    //     reader.onload = function() {
+    //         //创建img
+    //         var img = document.createElement('img');
+    //         img.src = reader.result;
+    //         document.body.appendChild(img)
+    //     }
+    // }
+
+
+
+    //读取多个文件  自调用函数
+    // document.querySelector('#file').onchange = function() {
+    //     //获取文件
+    //     var files = this.files;
+    //     //利用循环 获取多个文件
+    //     for (var i = 0; i < files.length; i++) {
+    //         (function() {
+    //             //构造对象
+    //             var reader = new FileReader();
+    //             //调用方法
+    //             reader.readAsDataURL(files[i]);
+    //             reader.onload = function() {
+    //                 //创建img
+    //                 var img = document.createElement('img');
+    //                 img.src = reader.result;
+    //                 document.body.appendChild(img)
+    //             }
+    //         })()
+    //     }
+
+    // }
+</script>
+
+</html>

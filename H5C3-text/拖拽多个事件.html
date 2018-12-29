@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box1,
+        #box2,
+        #box3 {
+            float: left;
+            margin-left: 20px;
+            width: 200px;
+            height: 200px;
+            border: 1px solid #000;
+        }
+        
+        #stp1,
+        #stp2 {
+            display: block;
+            background-color: pink;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box1">
+        <p id="stp1" draggable="true">被拖拽的元素</p>
+        <p id="stp2" draggable="true">我也是被拖拽的元素</p>
+    </div>
+    <div id="box2"></div>
+    <div id="box3"></div>
+    <script>
+        var obj;
+        document.ondrag = function(e) {
+            // console.log(e);
+            obj = e.target;
+        }
+        document.ondragover = function(e) {
+            e.preventDefault();
+        }
+        document.ondrop = function(e) {
+            e.target.appendChild(obj);
+        }
+    </script>
+</body>
+
+</html>

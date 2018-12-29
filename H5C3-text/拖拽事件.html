@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box1,
+        #box2 {
+            float: left;
+            width: 200px;
+            height: 200px;
+            border: 1px solid #000;
+        }
+        
+        #stp {
+            display: block;
+            background-color: pink;
+        }
+        
+        #box2 {
+            margin-left: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box1">
+        <p id="stp" draggable="true">被拖拽的元素</p>
+    </div>
+    <div id="box2"></div>
+    <script>
+        //拖拽元素
+        //       ondrag: 拖拽元素拖拽时一直触发
+        //  ondragstart: 拖拽元素开始拖拽时触发
+        //  ondragend:拖拽元素结束拖拽时触发
+        //  ondragleave：鼠标离开拖拽元素所占区域时触发
+        var p = document.querySelector('#stp');
+        // document.querySelector('#stp').ondrag = function() {
+        //         // console.log("ondrag");
+        //     }
+        // document.querySelector('#stp').ondragstart = function() {
+        //     console.log("ondragstart");
+        // }
+        // document.querySelector('#stp').ondragend = function() {
+        //     console.log("ondragend");
+        // }
+        // document.querySelector('#stp').ondragleave = function() {
+        //     console.log("ondragleave");
+        // }
+
+        //目标元素
+        // ondragenter: 拖拽元素进入时调用
+        // ondragover: 停留在目标元素上时调用
+        // ondrop: 在目标元素上松开鼠标时调用
+        // ondragleave: 鼠标离开目标元素时调用
+        // ondrop事件默认是不会触发的，需在ondragover事件中阻止默认事件 e.preventDefault();
+        // document.querySelector("#box2").ondragenter = function() {
+        //     console.log("ondragenter");
+        // }
+        document.querySelector("#box2").ondragover = function(e) {
+            // console.log("ondragover");
+            e.preventDefault();
+        }
+        document.querySelector("#box2").ondrop = function() {
+                // console.log("ondrop");
+                this.appendChild(p);
+            }
+            // document.querySelector("#box2").ondragleave = function() {
+            //     console.log("ondragleave");
+            // }
+
+
+
+        document.querySelector("#box1").ondragover = function(e) {
+            // console.log("ondragover");
+            e.preventDefault();
+        }
+        document.querySelector("#box1").ondrop = function() {
+            // console.log("ondrop");
+            this.appendChild(p);
+        }
+    </script>
+</body>
+
+</html>

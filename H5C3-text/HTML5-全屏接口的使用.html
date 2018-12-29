@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <img src="images/l1.jpg" alt=""><br>
+        <input type="button" id="full" value="全屏">
+        <input type="button" id="cancelFull" value="退出全屏">
+        <input type="button" id="isFull" value="是否全屏">
+    </div>
+    <script>
+        /*全屏操作的主要方法和属性
+         * 1.requestFullScreen():开启全屏显示
+         *   不同浏览器需要添加不同的前缀
+         *   chrome:webkit   firefox:moz   ie:ms   opera:o
+         * 2.cancelFullScreen():退出全屏显示:也添加前缀，在不同的浏览器下.退出全屏只能使用document来实现
+         * 3.fullScreenElement:是否是全屏状态，也只能使用document进行判断*/
+        var div = document.querySelector('div');
+        //全屏操作
+        document.querySelector('#full').onclick = function() {
+                //能力测试
+                if (div.requestFullScreen) {
+                    div.requestFullScreen();
+                } else if (div.webkitRequestFullScreen) {
+                    div.webkitRequestFullScreen();
+                } else if (div.msRequestFullScreen) {
+                    div.msRequestFullScreen();
+                } else if (div.mozRequestFullScreen) {
+                    div.mozRequestFullScreen();
+                }
+            }
+            //退出全屏
+        document.querySelector('#cancelFull').onclick = function() {
+            //能力测试
+            if (document.cancelFullScreen) {
+                document.cancelFullScreen();
+            } else if (document.webkitCancelFullScreen) {
+                document.webkitCancelFullScreen();
+            } else if (document.msCancelFullScreen) {
+                document.msCancelFullScreen();
+            } else if (document.mozCancelFullScreen) {
+                document.mozCancelFullScreen();
+            }
+        }
+
+        //判断是否全屏
+        document.querySelector('#isFull').onclick = function() {
+            //能力测试
+            if (document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement) {
+                alert(true);
+            } else {
+                alert(false);
+            }
+        }
+    </script>
+</body>
+
+</html>
