@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var add1 = '四川省成都市都江堰市天马镇34号';
+        var add2 = '北京市北京市东城区前门大街1号'
+        var add3 = '新疆维吾尔自治区乌鲁木齐市天山区中山路479号';
+        var add4 = '四川省成都市双流县幸福社区23号';
+        var add5 = '香港特别行政区中西区尖沙嘴路';
+        var reg = /.+?(省|市|自治区|自治州|县|区)/g;
+        console.log(add1 + ': ', add1.match(reg));
+        console.log(add2 + ': ', add2.match(reg));
+        console.log(add3 + ': ', add3.match(reg));
+        console.log(add4 + ': ', add4.match(reg));
+        console.log(add5 + ': ', add5.match(reg));
+    </script>
+</body>
+
+</html>

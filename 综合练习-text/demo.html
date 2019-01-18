@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery.js"></script>
+</head>
+
+<body>
+    <input type="text" id="input" maxlength="10">
+    <p></p>
+    <script>
+        var flag = true;
+        $('#input').on('compositionstart', function() { //打拼音时触发
+            flag = false;
+            // console.log(123);
+        })
+        $('#input').on('compositionend', function() { //打拼音结束后触发
+            flag = true;
+            // console.log(345);
+        })
+        document.querySelector('#input').oninput = function() {
+            var that = this;
+            setTimeout(function() {
+                if (flag) {
+                    var len = that.value.length;
+                    console.log(len);
+                    if (len <= 10) {
+                        document.querySelector('p').innerHTML = "还可以再输入" + (10 - len) + "个字";
+                    } else {
+                        document.querySelector('p').innerHTML = "超过10字,禁止输入";
+                        return;
+                    }
+                }
+            }, 0)
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery.js"></script>
+    <script src="./template-web.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        a {
+            text-decoration: none;
+        }
+        
+        td {
+            text-align: center;
+        }
+        
+        ul {
+            list-style: none;
+            /* width: 150px; */
+        }
+        
+        ul li {
+            float: left;
+            width: 50px;
+            border: 1px solid #ccc;
+            height: 20px;
+            line-height: 20px;
+            text-align: center;
+        }
+        
+        th,
+        td {
+            width: 125px;
+            height: 50px;
+        }
+        
+        table {
+            margin: 0 auto;
+        }
+        
+        .active {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="text" id="id"><input type="text" id="name"><input type="text" id="age">
+    <a href="javascript:;" id="add">添加</a>
+    <a href="javascript:;" id="ascending">升序</a>
+    <a href="javascript:;" id="descending">降序</a>
+    <table border="1" width="500" align="center" cellspacing="0" cellpadding="20" id="table">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>age</th>
+                <th>属性</th>
+            </tr>
+        </thead>
+        <tbody>
+
+
+        </tbody>
+    </table>
+
+    <ul id="paging"></ul>
+
+
+</body>
+<script type="text/template" id="tmp">
+    {{each list }}
+    <tr>
+        <td>{{$value.id}}</td>
+        <td>{{$value.name}}</td>
+        <td>{{$value.age}}</td>
+        <td>
+            <a href="javascript:;" class="del" data-id="{{$index}}">删除</a>
+        </td>
+    </tr>
+
+    {{/each}}
+</script>
+
+
+<script type="text/template" id="paginationTpl">
+
+    <li {{if ((currentPage-1) <1)}} style="display:none" {{/if}} pageId="{{currentPage-1}}"><a href="#">上一页</a></li>
+    <li {{if ((currentPage-1) <1)}} style="display:none" {{/if}} pageId="{{currentPage-1}}"><a href="#">{{currentPage-1}}</a></li>
+    <li class="active" pageId="{{currentPage}}"> <a href="#">{{currentPage}}</a></li>
+    <li {{if ((currentPage+1)>totalPage)}} style="display:none" {{/if}} pageId="{{currentPage+1}}"> <a href="#">{{currentPage+1}}</a></li>
+    <li {{if ((currentPage+1)>totalPage)}} style="display:none" {{/if}} pageId="{{currentPage+1}}"> <a href="#">下一页</a></li>
+
+
+</script>
+<script>
+    var json = [{
+        id: 1,
+        name: "zs",
+        age: 18
+    }, {
+        id: 2,
+        name: "ls",
+        age: 20
+    }, {
+        id: 3,
+        name: "ww",
+        age: 22
+    }];
+    //定义当前页数
+    var currentPage = 1;
+    //1.进来先渲染数据到页面上
+    //将json对象转化为字符串
+    var str = JSON.stringify(json);
+    //封装渲染函数  
+    function render(jsonObj) {
+        var html = template("tmp", {
+            list: jsonObj
+        });
+        $("tbody").html(html);
+    }
+    //判断localStorage是否有数据,如果有直接渲染,如果没有先存储数据然后渲染
+    if (!localStorage.getItem("key")) {
+        var res = localStorage.setItem("key", str);
+        //渲染调用函数
+        render(json);
+        getPage(currentPage);
+    } else {
+        //如果localStorage有数据   获取数据
+        var item = localStorage.getItem("key");
+        var jsonadd = JSON.parse(item);
+        //渲染调用函数
+        render(jsonadd);
+        getPage(currentPage);
+    }
+    // 2.添加数据
+    var obj = {};
+    $("#add").click(function() {
+        var id = $('#id').val();
+        var name = $('#name').val();
+        var age = $('#age').val();
+        obj['id'] = Number(id);
+        obj['name'] = name;
+        obj['age'] = Number(age);
+        //从localStorage得到数据,转化成数组,将obj追加进数组
+        var addres = localStorage.getItem("key");
+        var addData = JSON.parse(addres);
+
+
+        // addData.forEach(function(value, index) {
+        //         if (value.id == obj['id']) {
+        //             if (value['name'] == obj['name']) {
+        //                 if (value['age'] == obj['age']) {
+        //                     return;
+        //                 }
+        //             } else {
+        //                 addData.push(obj);
+        //             }
+        //         } else {
+        //             addData.push(obj);
+        //         }
+        //     })
+        addData.push(obj);
+        //将新的数组转化成字符串保存到localStorage
+        var res = JSON.stringify(addData);
+        var result = localStorage.setItem("key", res);
+        render(addData);
+        getPage(currentPage);
+    });
+
+    //3.删除数据
+    $('tbody').on('click', '.del', function() {
+        //获取自定义属性的值 这个值也是数组的索引值  记录索引值
+        var index = $(this).attr('data-id');
+        //从 localStorage拿出数据转化成数组
+        var addreu = localStorage.getItem("key");
+        var addDatas = JSON.parse(addreu);
+        // console.log(addDatas);
+        //从数组中把要删除的数据删除  用splice
+        addDatas.splice(index, 1);
+        // console.log(addDatas);
+        //将新的数组转化成字符串保存到localStorage
+        var del = JSON.stringify(addDatas);
+        var newData = localStorage.setItem("key", del);
+        var obj = localStorage.getItem("key");
+        var arr = JSON.parse(obj);
+        render(arr);
+        getPage(currentPage);
+    })
+
+
+
+    //升序
+    $('#ascending').click(function() {
+            //获取localStorage中的数据
+            var data = localStorage.getItem("key");
+            //数据字符串转化为json对象
+            var jsonobj = JSON.parse(data);
+            var arr = jsonobj.sort(order("age"))
+                // console.log(arr);
+                //调用函数进行渲染
+            render(arr);
+            getPage(currentPage);
+        })
+        //升序函数
+    function order(age) {
+        return function(a, b) {
+            var aobj = a[age];
+            var bobj = b[age];
+            return aobj - bobj;
+        }
+    }
+    //降序函数
+    function desc(age) {
+        return function(a, b) {
+            var aobj = a[age];
+            var bobj = b[age];
+            return bobj - aobj;
+        }
+    }
+    //降序排列
+    $('#descending').click(function() {
+        //获取localStorage中的数据
+        var data = localStorage.getItem("key");
+        //数据字符串转化为json对象
+        var jsonobj = JSON.parse(data);
+        var arr = jsonobj.sort(desc("age"))
+            // console.log(arr);
+            //调用函数进行渲染
+        render(arr);
+        getPage(currentPage);
+    })
+
+
+
+    //分页功能
+    function getPage(currentPage) {
+        //获取表格
+        var table = document.querySelector('#table');
+        //获取表格的行数
+        var rows = table.rows.length;
+        // console.log(rows);
+        //定义总页数
+        var totalPage = 0;
+        //定义每页显示行数
+        var pageSize = 5;
+        //如果rows/pageSize>1 说明不只有一页
+        if (rows / pageSize > 1) {
+            totalPage = parseInt(rows / pageSize) + 1;
+        } else {
+            totalPage = parseInt(rows / pageSize);
+        }
+        //每一页的开始一行
+        var start = (currentPage - 1) * pageSize + 1;
+        //每一页的最后一行 
+        var end;
+        if (end == rows) {
+            end = rows;
+        } else {
+            end = currentPage * pageSize;
+        }
+        //for 循环遍历实现分页隐藏
+        for (var i = 1; i <= rows; i++) {
+            //定义每一行
+            var row = table.rows[i - 1];
+            // 如果这一行在首行和尾行显示,则显示;否则隐藏
+            if (i >= start && i <= end) {
+                row.style.display = "block";
+            } else {
+                row.style.display = "none";
+            }
+        }
+        //模板渲染
+        var html = template("paginationTpl", {
+            "currentPage": currentPage,
+            "totalPage": totalPage
+        });
+        $("#paging").html(html);
+    }
+    //分页点击事件
+    $('#paging').on('click', 'li', function() {
+        currentPage = parseInt($(this).attr('pageId'));
+        // console.log(currentPage);
+        getPage(currentPage);
+    })
+</script>
+
+</html>
